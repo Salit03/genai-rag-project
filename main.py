@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from rag_service import ask_question
 
@@ -12,7 +12,10 @@ app = FastAPI(
 
 
 class QuestionRequest(BaseModel):
-    question: str
+    question: str = Field(
+        min_length=1,
+        description="Question about the company policy"
+    )
 
 
 class AnswerResponse(BaseModel):
